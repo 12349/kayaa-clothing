@@ -5,6 +5,8 @@ import { FabricSwatchSvg } from '../common/FabricSwatchSvg';
 import { useCurrency } from '../../context/CurrencyContext';
 import { Scissors, Clock, Sparkles } from 'lucide-react';
 
+import { getAssetUrl } from '../../utils/assets';
+
 interface ProductCardProps {
   product: Product;
 }
@@ -28,7 +30,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         {product.images && product.images.length > 0 ? (
           <div className="relative w-full h-full">
             <img
-              src={product.images[0]}
+              src={getAssetUrl(product.images[0])}
               alt={product.name}
               className={`w-full h-full object-cover transition-all duration-500 ${
                 product.images.length > 1 ? 'group-hover:opacity-0' : 'group-hover:scale-105'
@@ -37,7 +39,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             />
             {product.images.length > 1 && (
               <img
-                src={product.images[1]}
+                src={getAssetUrl(product.images[1])}
                 alt={`${product.name} secondary angle`}
                 className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-500 group-hover:scale-105"
                 loading="lazy"

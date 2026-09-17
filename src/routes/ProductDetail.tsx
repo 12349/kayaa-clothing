@@ -10,6 +10,7 @@ import { VerifiedContactPanel } from '../components/common/VerifiedContactPanel'
 import { useCart } from '../context/CartContext';
 import { useCurrency } from '../context/CurrencyContext';
 import { BRAND_CONFIG, getWhatsAppInquiryLink } from '../config/brand';
+import { getAssetUrl } from '../utils/assets';
 import {
   Scissors,
   ShieldCheck,
@@ -162,7 +163,7 @@ export const ProductDetail: React.FC = () => {
           <div className="relative aspect-[4/5] rounded-lg overflow-hidden border-2 border-dashed border-chalk-border dark:border-chalk-dark bg-jamun shadow-atelier-lift">
             {typeof activeMedia === 'number' && product.images && product.images[activeMedia] ? (
               <img
-                src={product.images[activeMedia]}
+                src={getAssetUrl(product.images[activeMedia])}
                 alt={`${product.name} view ${activeMedia + 1}`}
                 className="w-full h-full object-cover animate-in fade-in duration-300"
               />
@@ -206,7 +207,7 @@ export const ProductDetail: React.FC = () => {
                   }`}
                   aria-label={`View photo ${idx + 1}`}
                 >
-                  <img src={imgUrl} alt="Thumbnail" className="w-full h-full object-cover" />
+                  <img src={getAssetUrl(imgUrl)} alt="Thumbnail" className="w-full h-full object-cover" />
                 </button>
               ))}
 
