@@ -1,0 +1,176 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-canvas: #FBF8F4;
+    --color-canvas-subtle: #F5EFE7;
+    --color-ink: #231628;
+    --color-ink-muted: #5E4E63;
+    --color-thread: #C87A74;
+    --color-trust: #115E59;
+    --color-trust-pale: #E6F6F4;
+    --color-surface: #EDE5D8;
+    --color-border: #E2D7C7;
+  }
+
+  .dark {
+    --color-canvas: #17101C;
+    --color-canvas-subtle: #1F1725;
+    --color-ink: #FBF8F4;
+    --color-ink-muted: #BDB0C3;
+    --color-thread: #DF8C86;
+    --color-trust: #2DD4BF;
+    --color-trust-pale: #0B3834;
+    --color-surface: #251B2B;
+    --color-border: #382B3E;
+  }
+
+  body {
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
+    font-family: 'Albert Sans', system-ui, sans-serif;
+    letter-spacing: -0.01em;
+  }
+
+  /* Accessible touch targets & visible keyboard focus */
+  a, button, input, select, textarea {
+    touch-action: manipulation;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+  }
+
+  .dark :focus-visible {
+    outline: 2px solid var(--color-thread);
+    outline-offset: 2px;
+  }
+}
+
+/* Material Craft Details: Running stitch, selvedge, tailor's chalk */
+.border-stitch {
+  border-style: dashed;
+  border-width: 1px;
+  border-color: var(--color-border);
+}
+
+.border-stitch-thread {
+  border-style: dashed;
+  border-width: 1px;
+  border-color: var(--color-thread);
+}
+
+.stitch-divider {
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--color-border) 0,
+    var(--color-border) 4px,
+    transparent 4px,
+    transparent 8px
+  );
+  height: 1px;
+  width: 100%;
+}
+
+.stitch-divider-thread {
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--color-thread) 0,
+    var(--color-thread) 5px,
+    transparent 5px,
+    transparent 10px
+  );
+  height: 1.5px;
+  width: 100%;
+}
+
+/* Selvedge edge accent */
+.selvedge-edge {
+  position: relative;
+}
+.selvedge-edge::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--color-thread) 0,
+    var(--color-thread) 3px,
+    var(--color-surface) 3px,
+    var(--color-surface) 6px
+  );
+}
+
+/* Garment woven label effect */
+.garment-label {
+  background-color: #F8F5EE;
+  color: #231628;
+  border: 1px dashed #C87A74;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  display: inline-flex;
+  align-items: center;
+  box-shadow: 0 1px 2px rgba(35, 22, 40, 0.06);
+}
+
+/* Pattern piece corner notches */
+.tailor-corner {
+  clip-path: polygon(
+    0 8px, 8px 0,
+    calc(100% - 8px) 0, 100% 8px,
+    100% calc(100% - 8px), calc(100% - 8px) 100%,
+    8px 100%, 0 calc(100% - 8px)
+  );
+}
+
+/* Print stylesheets for /order/:id/receipt & /order/:id/worksheet */
+@media print {
+  @page {
+    margin: 12mm 15mm;
+    size: auto;
+  }
+
+  body {
+    background: #FFFFFF !important;
+    color: #000000 !important;
+    font-size: 11pt !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  .print-page-break {
+    page-break-after: always;
+  }
+
+  .print-container {
+    box-shadow: none !important;
+    border: 1px solid #666666 !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
